@@ -46,10 +46,10 @@ switch by
     binCenter = [binWidth:binWidth:ceil(max(in.Pressure))]';
     out.Pressure = binCenter;
   case 'depth'
-    in.Depth = -gsw_z_from_p(in.Pressure,52);
+    in.Depth = -gsw_z_from_p(in.Pressure,in.Latitude);
     binCenter = [binWidth:binWidth:ceil(max(in.Depth))]';
+    out.Pressure = gsw_p_from_z(-out.Depth,in.Latitude);
     out.Depth = binCenter;
-    out.Pressure = gsw_p_from_z(-out.Depth,52);
     unit = 'm'; % for processing log text
 end
 out.units(end+1) = {'m'};
